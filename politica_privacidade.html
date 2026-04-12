@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Política de Privacidade — Juntoo</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background-color: #0e0e0e;
+      color: #d4d4d4;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    header {
+      background-color: #121212;
+      border-bottom: 1px solid #1e1e1e;
+      padding: 28px 24px;
+      text-align: center;
+    }
+
+    .logo {
+      font-size: 32px;
+      font-weight: 900;
+      color: #00e676;
+      letter-spacing: -1px;
+      margin-bottom: 4px;
+    }
+
+    .tagline {
+      font-size: 14px;
+      color: #555;
+    }
+
+    main {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    h1 {
+      font-size: 26px;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+
+    .updated {
+      font-size: 13px;
+      color: #555;
+      margin-bottom: 32px;
+      display: block;
+    }
+
+    .intro {
+      background: #1a1a1a;
+      border-left: 3px solid #00e676;
+      border-radius: 0 12px 12px 0;
+      padding: 18px 20px;
+      margin-bottom: 40px;
+      color: #aaa;
+      font-size: 15px;
+    }
+
+    .intro strong { color: #fff; }
+
+    .age-badge {
+      display: inline-block;
+      background: #00e676;
+      color: #121212;
+      font-weight: 700;
+      font-size: 13px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-top: 10px;
+    }
+
+    h2 {
+      font-size: 19px;
+      font-weight: 700;
+      color: #00e676;
+      margin: 48px 0 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #1e1e1e;
+    }
+
+    h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #ffffff;
+      margin: 24px 0 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    p { margin-bottom: 14px; color: #aaa; }
+
+    ul {
+      list-style: none;
+      margin: 0 0 16px;
+      padding: 0;
+    }
+
+    ul li {
+      padding: 8px 0 8px 20px;
+      border-bottom: 1px solid #1a1a1a;
+      color: #aaa;
+      position: relative;
+    }
+
+    ul li::before {
+      content: '▸';
+      color: #00e676;
+      position: absolute;
+      left: 0;
+      font-size: 12px;
+      top: 10px;
+    }
+
+    ul li:last-child { border-bottom: none; }
+
+    strong { color: #e0e0e0; }
+
+    .section-box {
+      background: #161616;
+      border: 1px solid #1e1e1e;
+      border-radius: 14px;
+      padding: 20px 22px;
+      margin-bottom: 12px;
+    }
+
+    .rights-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .right-item {
+      background: #1a1a1a;
+      border: 1px solid #252525;
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 14px;
+      color: #bbb;
+    }
+
+    .right-item span {
+      display: block;
+      color: #00e676;
+      font-weight: 700;
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+
+    .contact-box {
+      background: #161616;
+      border: 1px solid #00e676;
+      border-radius: 14px;
+      padding: 22px 24px;
+      margin-top: 16px;
+    }
+
+    .contact-box a {
+      color: #00e676;
+      text-decoration: none;
+    }
+
+    .contact-box a:hover { text-decoration: underline; }
+
+    .contact-line {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      font-size: 15px;
+      color: #bbb;
+    }
+
+    .contact-line:last-child { margin-bottom: 0; }
+
+    .contact-icon {
+      width: 32px;
+      height: 32px;
+      background: #1e1e1e;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #1e1e1e;
+      margin: 40px 0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 32px 24px;
+      border-top: 1px solid #1e1e1e;
+      font-size: 13px;
+      color: #444;
+    }
+
+    footer a { color: #00e676; text-decoration: none; }
+
+    .no-tracking {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(0, 230, 118, 0.08);
+      border: 1px solid rgba(0, 230, 118, 0.2);
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-size: 13px;
+      color: #00e676;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 22px; }
+      h2 { font-size: 17px; }
+      .rights-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">Juntoo</div>
+    <div class="tagline">Conexões reais, sem enrolação 🇧🇷</div>
+  </header>
+
+  <main>
+
+    <h1>Política de Privacidade</h1>
+    <span class="updated">Última atualização: 31 de março de 2026</span>
+
+    <div class="intro">
+      O <strong>Juntoo</strong> é um serviço de conexões sociais desenvolvido e operado por <strong>Alexsandro Migotti</strong>, com sede no Brasil. Esta política explica como coletamos, usamos e protegemos suas informações, em conformidade com a <strong>LGPD (Lei nº 13.709/2018)</strong>, o <strong>Marco Civil da Internet</strong> e as políticas do <strong>Google Play</strong> e <strong>App Store</strong>.
+      <br/><br/>
+      Ao criar uma conta no Juntoo, você confirma que tem 18 anos ou mais e concorda com os termos desta política.
+      <br/>
+      <span class="age-badge">🔞 Aplicativo para maiores de 18 anos</span>
+    </div>
+
+    <!-- 1 -->
+    <h2>1. Informações que coletamos</h2>
+
+    <h3>1.1 Fornecidas por você</h3>
+    <ul>
+      <li><strong>Dados de cadastro:</strong> nome, e-mail e senha</li>
+      <li><strong>Perfil:</strong> fotos, data de nascimento, cidade, gênero, orientação sexual, pronomes, altura, signo, bio, interesses e preferências de relacionamento</li>
+      <li><strong>Mensagens:</strong> conteúdo das conversas dentro do aplicativo</li>
+      <li><strong>Denúncias:</strong> informações que você fornece ao reportar outro usuário</li>
+    </ul>
+
+    <h3>1.2 Coletadas automaticamente</h3>
+    <ul>
+      <li><strong>Localização GPS:</strong> com sua permissão, para mostrar pessoas próximas. Pode ser desativada a qualquer momento</li>
+      <li><strong>Token de notificação:</strong> identificador do dispositivo para envio de alertas</li>
+      <li><strong>Dados de uso:</strong> swipes, matches e mensagens enviadas — usados apenas para o funcionamento do serviço</li>
+    </ul>
+
+    <h3>1.3 De terceiros</h3>
+    <ul>
+      <li><strong>Cloudinary:</strong> armazenamento das suas fotos de perfil</li>
+      <li><strong>Firebase (Google):</strong> autenticação, banco de dados e infraestrutura do app</li>
+    </ul>
+
+    <!-- 2 -->
+    <h2>2. Como usamos suas informações</h2>
+    <ul>
+      <li><strong>Criar e manter sua conta</strong> e autenticar seu acesso</li>
+      <li><strong>Exibir seu perfil</strong> para usuários compatíveis com seus filtros</li>
+      <li><strong>Encontrar conexões</strong> com base em localização, idade, gênero e preferências</li>
+      <li><strong>Enviar notificações</strong> sobre novos matches, mensagens e atualizações</li>
+      <li><strong>Processar denúncias</strong> e garantir a segurança da comunidade</li>
+      <li><strong>Melhorar o app</strong> com base em padrões de uso agregados e anônimos</li>
+      <li><strong>Cumprir obrigações legais</strong> quando exigido por lei ou autoridade competente</li>
+    </ul>
+    <div class="no-tracking">✅ Não vendemos nem compartilhamos seus dados para fins de marketing</div>
+
+    <!-- 3 -->
+    <h2>3. Compartilhamento de informações</h2>
+    <ul>
+      <li><strong>Com outros usuários:</strong> seu perfil público é visível para outros usuários do Juntoo</li>
+      <li><strong>Com prestadores de serviço:</strong> Firebase e Cloudinary processam dados em nosso nome, sob contratos de proteção</li>
+      <li><strong>Por obrigação legal:</strong> quando exigido por lei, ordem judicial ou autoridade pública</li>
+      <li><strong>Para proteção de direitos:</strong> em casos de fraude ou violação desta política</li>
+    </ul>
+
+    <!-- 4 -->
+    <h2>4. Armazenamento e segurança</h2>
+    <ul>
+      <li>Dados armazenados em servidores do <strong>Firebase (Google Cloud)</strong>, no Brasil e/ou EUA</li>
+      <li>Senhas gerenciadas pelo <strong>Firebase Authentication</strong> — nunca em texto simples</li>
+      <li>Fotos armazenadas no <strong>Cloudinary</strong> com acesso controlado</li>
+      <li>Medidas técnicas razoáveis contra acesso não autorizado, perda ou destruição</li>
+      <li>Incidentes de segurança serão notificados a você e à <strong>ANPD</strong> conforme a LGPD</li>
+    </ul>
+
+    <!-- 5 -->
+    <h2>5. Retenção de dados</h2>
+    <ul>
+      <li>Dados mantidos enquanto sua conta estiver ativa</li>
+      <li>Conta excluída: dados removidos em até <strong>30 dias</strong></li>
+      <li>Logs de segurança e denúncias: mantidos por até <strong>6 meses</strong></li>
+      <li>Dados anonimizados e agregados podem ser mantidos para fins estatísticos</li>
+    </ul>
+
+    <!-- 6 -->
+    <h2>6. Seus direitos (LGPD)</h2>
+    <p>Como titular de dados, você tem direito a:</p>
+    <div class="rights-grid">
+      <div class="right-item"><span>Acesso</span>Ver seus dados armazenados</div>
+      <div class="right-item"><span>Correção</span>Atualizar dados incorretos</div>
+      <div class="right-item"><span>Exclusão</span>Apagar seus dados</div>
+      <div class="right-item"><span>Portabilidade</span>Exportar seus dados</div>
+      <div class="right-item"><span>Revogação</span>Cancelar consentimento</div>
+      <div class="right-item"><span>Oposição</span>Contestar o tratamento</div>
+    </div>
+    <p style="margin-top:16px;">Para exercer seus direitos: <a href="mailto:privacidade@juntoo.app" style="color:#00e676;">privacidade@juntoo.app</a></p>
+
+    <!-- 7 -->
+    <h2>7. Dados sensíveis</h2>
+    <p>O Juntoo pode coletar informações consideradas <strong>dados sensíveis</strong> pela LGPD, como orientação sexual e informações de saúde (fumante, atividade física). Esses dados são coletados <strong>somente com seu consentimento explícito</strong> e usados exclusivamente para melhorar a compatibilidade entre usuários. Você pode omitir essas informações no seu perfil.</p>
+
+    <!-- 8 -->
+    <h2>8. Menores de idade</h2>
+    <p>O Juntoo é destinado exclusivamente a pessoas com <strong>18 anos ou mais</strong>. Não coletamos intencionalmente dados de menores. Se soubermos que um menor criou uma conta, excluiremos os dados imediatamente.</p>
+    <p>Suspeita de menor usando o app? Reporte: <a href="mailto:seguranca@juntoo.app" style="color:#00e676;">seguranca@juntoo.app</a></p>
+
+    <!-- 9 -->
+    <h2>9. Notificações push</h2>
+    <p>Com sua permissão, enviamos notificações sobre matches, mensagens e atualizações. Você pode desativar as notificações a qualquer momento nas configurações do seu dispositivo.</p>
+
+    <!-- 10 -->
+    <h2>10. Localização</h2>
+    <p>Com sua permissão, acessamos sua localização para sugerir pessoas próximas. Você pode:</p>
+    <ul>
+      <li>Desativar a localização GPS nas configurações do aplicativo</li>
+      <li>Escolher uma cidade manualmente nos filtros</li>
+      <li>Revogar a permissão nas configurações do dispositivo</li>
+    </ul>
+    <div class="no-tracking">✅ Não rastreamos sua localização em segundo plano</div>
+
+    <!-- 11 -->
+    <h2>11. Cookies e rastreamento</h2>
+    <p>O Juntoo <strong>não usa cookies de rastreamento</strong>. Utilizamos apenas tokens de sessão para manter você autenticado e tokens de notificação para envio de alertas.</p>
+
+    <!-- 12 -->
+    <h2>12. Serviços de terceiros</h2>
+    <p>O aplicativo pode conter links para serviços externos. Esta política não se aplica a esses serviços. Recomendamos que você leia as políticas de privacidade de qualquer serviço de terceiro que acessar.</p>
+
+    <!-- 13 -->
+    <h2>13. Alterações nesta política</h2>
+    <p>Podemos atualizar esta política periodicamente. Quando houver mudanças relevantes, notificaremos você pelo aplicativo ou por e-mail. O uso continuado do Juntoo após as alterações constitui aceitação da nova política.</p>
+
+    <!-- 14 -->
+    <h2>14. Contato</h2>
+    <div class="contact-box">
+      <div class="contact-line">
+        <div class="contact-icon">✉️</div>
+        <span>Privacidade: <a href="mailto:privacidade@juntoo.app">privacidade@juntoo.app</a></span>
+      </div>
+      <div class="contact-line">
+        <div class="contact-icon">🛡️</div>
+        <span>Segurança: <a href="mailto:seguranca@juntoo.app">seguranca@juntoo.app</a></span>
+      </div>
+      <div class="contact-line">
+        <div class="contact-icon">👤</div>
+        <span>Desenvolvedor: Alexsandro Migotti — Brasil</span>
+      </div>
+      <div class="contact-line">
+        <div class="contact-icon">🏛️</div>
+        <span>ANPD: <a href="https://www.gov.br/anpd" target="_blank" rel="noopener">www.gov.br/anpd</a></span>
+      </div>
+    </div>
+
+    <hr/>
+
+    <p style="font-size:13px; color:#444; text-align:center;">
+      Elaborado em conformidade com a LGPD (Lei nº 13.709/2018), o Marco Civil da Internet (Lei nº 12.965/2014), as diretrizes do Google Play e os requisitos da App Store da Apple.
+    </p>
+
+  </main>
+
+  <footer>
+    <strong style="color:#00e676;">Juntoo</strong> &mdash; Conexões reais, sem enrolação 🇧🇷<br/>
+    <span>© 2026 Alexsandro Migotti. Todos os direitos reservados.</span>
+  </footer>
+
+</body>
+</html>

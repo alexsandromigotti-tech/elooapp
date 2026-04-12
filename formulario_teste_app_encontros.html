@@ -1,0 +1,413 @@
+
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font-sans); }
+  .doc { max-width: 780px; margin: 0 auto; padding: 1.5rem 1rem 3rem; }
+
+  .header { border-bottom: 2px solid #533AB7; padding-bottom: 1.25rem; margin-bottom: 1.5rem; }
+  .header-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; flex-wrap: wrap; }
+  .header h1 { font-size: 20px; font-weight: 500; color: var(--color-text-primary); }
+  .header p { font-size: 13px; color: var(--color-text-secondary); margin-top: 4px; }
+  .badge { font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 20px; background: #EEEDFE; color: #3C3489; white-space: nowrap; }
+
+  .meta-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; margin-bottom: 1.5rem; }
+  .meta-field { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 10px 12px; }
+  .meta-field label { font-size: 11px; color: var(--color-text-tertiary); display: block; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.04em; }
+  .meta-field input { background: none; border: none; outline: none; font-size: 13px; color: var(--color-text-primary); width: 100%; font-family: var(--font-sans); }
+
+  .section { margin-bottom: 1.75rem; }
+  .section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 0.5px solid var(--color-border-tertiary); }
+  .section-number { width: 24px; height: 24px; border-radius: 50%; background: #533AB7; color: #fff; font-size: 11px; font-weight: 500; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .section-title { font-size: 15px; font-weight: 500; color: var(--color-text-primary); }
+  .section-desc { font-size: 12px; color: var(--color-text-secondary); margin-left: auto; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  thead th { background: var(--color-background-secondary); padding: 8px 10px; text-align: left; font-size: 11px; font-weight: 500; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.04em; border-bottom: 0.5px solid var(--color-border-tertiary); }
+  tbody tr { border-bottom: 0.5px solid var(--color-border-tertiary); }
+  tbody tr:last-child { border-bottom: none; }
+  tbody td { padding: 9px 10px; color: var(--color-text-primary); vertical-align: top; line-height: 1.5; }
+  .td-id { color: var(--color-text-tertiary); font-size: 11px; white-space: nowrap; }
+  .td-step { font-weight: 500; }
+  .td-result { min-width: 90px; }
+
+  .status-select { background: none; border: 0.5px solid var(--color-border-tertiary); border-radius: 20px; font-size: 11px; font-family: var(--font-sans); padding: 3px 8px; cursor: pointer; color: var(--color-text-primary); appearance: none; text-align: center; }
+  .status-select:focus { outline: none; border-color: #533AB7; }
+
+  .notes-input { background: none; border: none; outline: none; font-size: 13px; font-family: var(--font-sans); color: var(--color-text-secondary); width: 100%; resize: none; min-height: 20px; line-height: 1.5; }
+  .notes-input::placeholder { color: var(--color-text-tertiary); }
+
+  .summary-bar { background: var(--color-background-secondary); border-radius: var(--border-radius-lg); padding: 1rem 1.25rem; display: flex; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; align-items: center; }
+  .summary-item { display: flex; flex-direction: column; gap: 2px; }
+  .summary-item .val { font-size: 22px; font-weight: 500; color: var(--color-text-primary); }
+  .summary-item .lbl { font-size: 11px; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.04em; }
+  .val-pass { color: #0F6E56; }
+  .val-fail { color: #993C1D; }
+  .val-pend { color: #854F0B; }
+
+  .obs-box { border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 12px; min-height: 80px; }
+  .obs-box textarea { width: 100%; background: none; border: none; outline: none; font-size: 13px; font-family: var(--font-sans); color: var(--color-text-primary); resize: none; min-height: 60px; line-height: 1.6; }
+  .obs-box textarea::placeholder { color: var(--color-text-tertiary); }
+
+  .assinatura { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 1.5rem; }
+  .ass-field { border-top: 0.5px solid var(--color-border-secondary); padding-top: 6px; }
+  .ass-field span { font-size: 11px; color: var(--color-text-tertiary); }
+
+  @media (max-width: 540px) {
+    .assinatura { grid-template-columns: 1fr; }
+    .summary-bar { gap: 1rem; }
+    thead th:nth-child(4), tbody td:nth-child(4) { display: none; }
+  }
+
+  .print-btn { background: #533AB7; color: #fff; border: none; border-radius: var(--border-radius-md); padding: 8px 18px; font-size: 13px; font-family: var(--font-sans); cursor: pointer; }
+  .print-btn:hover { background: #3C3489; }
+  .toolbar { display: flex; justify-content: flex-end; gap: 8px; margin-bottom: 1.25rem; }
+</style>
+
+<div class="doc">
+  <h2 class="sr-only">Formulário de teste do app de relacionamentos — do cadastro até a marcação de encontro</h2>
+
+  <div class="toolbar">
+    <button class="print-btn" onclick="window.print()">Imprimir / Salvar PDF</button>
+  </div>
+
+  <div class="header">
+    <div class="header-top">
+      <div>
+        <h1>Formulário de teste — fluxo completo do app</h1>
+        <p>Do cadastro até a marcação do encontro presencial</p>
+      </div>
+      <span class="badge">v1.0 · 2026</span>
+    </div>
+  </div>
+
+  <div class="meta-grid">
+    <div class="meta-field">
+      <label>Testador(a)</label>
+      <input type="text" placeholder="Nome completo" />
+    </div>
+    <div class="meta-field">
+      <label>Data do teste</label>
+      <input type="date" />
+    </div>
+    <div class="meta-field">
+      <label>Versão do app</label>
+      <input type="text" placeholder="ex: 1.2.0" />
+    </div>
+    <div class="meta-field">
+      <label>Dispositivo / SO</label>
+      <input type="text" placeholder="ex: iPhone 14 / iOS 17" />
+    </div>
+  </div>
+
+  <div id="summary" class="summary-bar">
+    <div class="summary-item"><span class="val" id="total">0</span><span class="lbl">Total</span></div>
+    <div class="summary-item"><span class="val val-pass" id="cnt-pass">0</span><span class="lbl">Aprovados</span></div>
+    <div class="summary-item"><span class="val val-fail" id="cnt-fail">0</span><span class="lbl">Falhou</span></div>
+    <div class="summary-item"><span class="val val-pend" id="cnt-pend">0</span><span class="lbl">Pendente</span></div>
+    <div class="summary-item" style="margin-left:auto"><span class="val" id="pct">–</span><span class="lbl">Taxa de aprovação</span></div>
+  </div>
+
+  <!-- SEÇÃO 1 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">1</div>
+      <span class="section-title">Cadastro e criação de conta</span>
+      <span class="section-desc">Objetivo: validar o fluxo de onboarding</span>
+    </div>
+    <table>
+      <thead><tr><th>ID</th><th>Caso de teste</th><th>Resultado esperado</th><th>Status</th><th>Observações</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="td-id">CT-01</td>
+          <td class="td-step">Abrir o app pela primeira vez</td>
+          <td>Tela de boas-vindas exibida corretamente com opção de cadastro</td>
+          <td class="td-result"><select class="status-select" onchange="recalc()"><option value="">–</option><option value="pass">✓ Passou</option><option value="fail">✗ Falhou</option><option value="skip">○ Pulado</option></select></td>
+          <td><textarea class="notes-input" placeholder="anotação..." rows="1"></textarea></td>
+        </tr>
+        <tr>
+          <td class="td-id">CT-02</td>
+          <td class="td-step">Cadastro com e-mail e senha válidos</td>
+          <td>Conta criada, e-mail de verificação enviado</td>
+          <td class="td-result"><select class="status-select" onchange="recalc()"><option value="">–</option><option value="pass">✓ Passou</option><option value="fail">✗ Falhou</option><option value="skip">○ Pulado</option></select></td>
+          <td><textarea class="notes-input" placeholder="anotação..." rows="1"></textarea></td>
+        </tr>
+        <tr>
+          <td class="td-id">CT-03</td>
+          <td class="td-step">Cadastro com e-mail já existente</td>
+          <td>Mensagem de erro clara e opção de fazer login</td>
+          <td class="td-result"><select class="status-select" onchange="recalc()"><option value="">–</option><option value="pass">✓ Passou</option><option value="fail">✗ Falhou</option><option value="skip">○ Pulado</option></select></td>
+          <td><textarea class="notes-input" placeholder="anotação..." rows="1"></textarea></td>
+        </tr>
+        <tr>
+          <td class="td-id">CT-04</td>
+          <td class="td-step">Cadastro via Google / redes sociais</td>
+          <td>Login social funciona e cria perfil automaticamente</td>
+          <td class="td-result"><select class="status-select" onchange="recalc()"><option value="">–</option><option value="pass">✓ Passou</option><option value="fail">✗ Falhou</option><option value="skip">○ Pulado</option></select></td>
+          <td><textarea class="notes-input" placeholder="anotação..." rows="1"></textarea></td>
+        </tr>
+        <tr>
+          <td class="td-id">CT-05</td>
+          <td class="td-step">Verificação de e-mail</td>
+          <td>Link de verificação funciona e ativa a conta</td>
+          <td class="td-result"><select class="status-select" onchange="recalc()"><option value="">–</option><option value="pass">✓ Passou</option><option value="fail">✗ Falhou</option><option value="skip">○ Pulado</option></select></td>
+          <td><textarea class="notes-input" placeholder="anotação..." rows="1"></textarea></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- SEÇÃO 2 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">2</div>
+      <span class="section-title">Configuração do perfil</span>
+      <span class="section-desc">Objetivo: validar preenchimento e edição do perfil</span>
+    </div>
+    <table>
+      <thead><tr><th>ID</th><th>Caso de teste</th><th>Resultado esperado</th><th>Status</th><th>Observações</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="td-id">CT-06</td>
+          <td class="td-step">Upload de foto de perfil</td>
+          <td>Foto salva e exibida corretamente no perfil</td>
+          <td class="td-result"><select class="status-select" onchange="recalc()"><option value="">–</option><option value="pass">✓ Passou</option><option value="fail">✗ Falhou</option><option value="skip">○ Pulado</option></select></td>
+          <td><textarea class="notes-input" placeholder="anotação..." rows="1"></textarea></td>
+        </tr>
+        <tr>
+          <td class="td-id">CT-07</td>
+          <td class="td-step">Preenchimento de bio / descrição</td>
+          <td>Texto salvo, limite de caracteres exibido</td>
+          <td class="td-result"><select class="status-select" onchange="recalc()"><option value="">–</option><option value="pass">✓ Passou</option><option value="fail">✗ Falhou</option><option value="skip">○ Pulado</option></select></td>
+          <td><textarea class="notes-input" placeholder="anotação..." rows="1"></textarea></td>
+        </tr>
+        <tr>
+          <td class="td-id">CT-08</td>
+          <td class="td-step">Seleção de interesses / preferências</td>
+          <td>Interesses salvos e refletem nas sugestões</td>
+          <td class="td-result"><select class="status-select" onchange="recalc()"><option value="">–</option><option value="pass">✓ Passou</option><option value="fail">✗ Falhou</option><option value="skip">○ Pulado</option></select></td>
+          <td><textarea class="notes-input" placeholder="anotação..." rows="1"></textarea></td>
+        </tr>
+        <tr>
+          <td class="td-id">CT-09</td>
+          <td class="td-step">Configurar preferências de match (gênero, distância, faixa etária)</td>
+          <td>Filtros salvos corretamente</td>
+          <td class="td-result"><select class="status-select" onchange="recalc()"><option value="">–</option><option value="pass">✓ Passou</option><option value="fail">✗ Falhou</option><option value="skip">○ Pulado</option></select></td>
+          <td><textarea class="notes-input" placeholder="anotação..." rows="1"></textarea></td>
+        </tr>
+        <tr>
+          <td class="td-id">CT-10</td>
+          <td class="td-step">Editar e salvar perfil depois de criado</td>
+          <td>Alterações persistem após fechar e reabrir o app</td>
+          <td class="td-result"><select class="status-select" onchange="recalc()"><option value="">–</option><option value="pass">✓ Passou</option><option value="fail">✗ Falhou</option><option value="skip">○ Pulado</option></select></td>
+          <td><textarea class="notes-input" placeholder="anotação..." rows="1"></textarea></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- SEÇÃO 3 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">3</div>
+      <span class="section-title">Descoberta e match</span>
+      <span class="section-desc">Objetivo: validar o sistema de sugestões e match</span>
+    </div>
+    <table>
+      <thead><tr><th>ID</th><th>Caso de teste</th><th>Resultado esperado</th><th>Status</th><th>Observações</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="td-id">CT-11</td>
+          <td class="td-step">Visualizar perfis sugeridos</td>
+          <td>Perfis dentro dos filtros configurados são exibidos</td>
+          <td class="td-result"><select class="status-select" onchange="recalc()"><option value="">–</option><option value="pass">✓ Passou</option><option value="fail">✗ Falhou</option><option value="skip">○ Pulado</option></select></td>
+          <td><textarea class="notes-input" placeholder="anotação..." rows="1"></textarea></td>
+        </tr>
+        <tr>
+          <td class="td-id">CT-12</td>
+          <td class="td-step">Dar like em um perfil</td>
+          <td>Ação registrada, perfil não aparece novamente</td>
+          <td class="td-result"><select class="status-select" onchange="recalc()"><option value="">–</option><option value="pass">✓ Passou</option><option value="fail">✗ Falhou</option><option value="skip">○ Pulado</option></select></td>
+          <td><textarea class="notes-input" placeholder="anotação..." rows="1"></textarea></td>
+        </tr>
+        <tr>
+          <td class="td-id">CT-13</td>
+          <td class="td-step">Dar dislike em um perfil</td>
+          <td>Perfil descartado e não retorna nas sugestões</td>
+          <td class="td-result"><select class="status-select" onchange="recalc()"><option value="">–</option><option value="pass">✓ Passou</option><option value="fail">✗ Falhou</option><option value="skip">○ Pulado</option></select></td>
+          <td><textarea class="notes-input" placeholder="anotação..." rows="1"></textarea></td>
+        </tr>
+        <tr>
+          <td class="td-id">CT-14</td>
+          <td class="td-step">Match mútuo — notificação gerada</td>
+          <td>Ambos os usuários recebem notificação de match</td>
+          <td class="td-result"><select class="status-select" onchange="recalc()"><option value="">–</option><option value="pass">✓ Passou</option><option value="fail">✗ Falhou</option><option value="skip">○ Pulado</option></select></td>
+          <td><textarea class="notes-input" placeholder="anotação..." rows="1"></textarea></td>
+        </tr>
+        <tr>
+          <td class="td-id">CT-15</td>
+          <td class="td-step">Visualizar perfil completo antes de dar like/dislike</td>
+          <td>Todas as fotos, bio e interesses são exibidos</td>
+          <td class="td-result"><select class="status-select" onchange="recalc()"><option value="">–</option><option value="pass">✓ Passou</option><option value="fail">✗ Falhou</option><option value="skip">○ Pulado</option></select></td>
+          <td><textarea class="notes-input" placeholder="anotação..." rows="1"></textarea></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- SEÇÃO 4 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">4</div>
+      <span class="section-title">Chat e comunicação</span>
+      <span class="section-desc">Objetivo: validar o sistema de mensagens</span>
+    </div>
+    <table>
+      <thead><tr><th>ID</th><th>Caso de teste</th><th>Resultado esperado</th><th>Status</th><th>Observações</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="td-id">CT-16</td>
+          <td class="td-step">Iniciar conversa após match</td>
+          <td>Chat abre corretamente com o histórico vazio</td>
+          <td class="td-result"><select class="status-select" onchange="recalc()"><option value="">–</option><option value="pass">✓ Passou</option><option value="fail">✗ Falhou</option><option value="skip">○ Pulado</option></select></td>
+          <td><textarea class="notes-input" placeholder="anotação..." rows="1"></textarea></td>
+        </tr>
+        <tr>
+          <td class="td-id">CT-17</td>
+          <td class="td-step">Enviar e receber mensagem de texto</td>
+          <td>Mensagem entregue em tempo real, status visível</td>
+          <td class="td-result"><select class="status-select" onchange="recalc()"><option value="">–</option><option value="pass">✓ Passou</option><option value="fail">✗ Falhou</option><option value="skip">○ Pulado</option></select></td>
+          <td><textarea class="notes-input" placeholder="anotação..." rows="1"></textarea></td>
+        </tr>
+        <tr>
+          <td class="td-id">CT-18</td>
+          <td class="td-step">Enviar foto / mídia no chat</td>
+          <td>Imagem enviada e exibida corretamente</td>
+          <td class="td-result"><select class="status-select" onchange="recalc()"><option value="">–</option><option value="pass">✓ Passou</option><option value="fail">✗ Falhou</option><option value="skip">○ Pulado</option></select></td>
+          <td><textarea class="notes-input" placeholder="anotação..." rows="1"></textarea></td>
+        </tr>
+        <tr>
+          <td class="td-id">CT-19</td>
+          <td class="td-step">Receber notificação push de nova mensagem</td>
+          <td>Notificação aparece mesmo com o app em segundo plano</td>
+          <td class="td-result"><select class="status-select" onchange="recalc()"><option value="">–</option><option value="pass">✓ Passou</option><option value="fail">✗ Falhou</option><option value="skip">○ Pulado</option></select></td>
+          <td><textarea class="notes-input" placeholder="anotação..." rows="1"></textarea></td>
+        </tr>
+        <tr>
+          <td class="td-id">CT-20</td>
+          <td class="td-step">Bloquear / denunciar usuário no chat</td>
+          <td>Usuário bloqueado, sem acesso ao chat</td>
+          <td class="td-result"><select class="status-select" onchange="recalc()"><option value="">–</option><option value="pass">✓ Passou</option><option value="fail">✗ Falhou</option><option value="skip">○ Pulado</option></select></td>
+          <td><textarea class="notes-input" placeholder="anotação..." rows="1"></textarea></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- SEÇÃO 5 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">5</div>
+      <span class="section-title">Marcação do encontro presencial</span>
+      <span class="section-desc">Objetivo: validar o fluxo de agendamento real</span>
+    </div>
+    <table>
+      <thead><tr><th>ID</th><th>Caso de teste</th><th>Resultado esperado</th><th>Status</th><th>Observações</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="td-id">CT-21</td>
+          <td class="td-step">Propor encontro via chat ou botão dedicado</td>
+          <td>Funcionalidade de agendamento é acessível</td>
+          <td class="td-result"><select class="status-select" onchange="recalc()"><option value="">–</option><option value="pass">✓ Passou</option><option value="fail">✗ Falhou</option><option value="skip">○ Pulado</option></select></td>
+          <td><textarea class="notes-input" placeholder="anotação..." rows="1"></textarea></td>
+        </tr>
+        <tr>
+          <td class="td-id">CT-22</td>
+          <td class="td-step">Selecionar data e horário do encontro</td>
+          <td>Calendário funciona, datas passadas bloqueadas</td>
+          <td class="td-result"><select class="status-select" onchange="recalc()"><option value="">–</option><option value="pass">✓ Passou</option><option value="fail">✗ Falhou</option><option value="skip">○ Pulado</option></select></td>
+          <td><textarea class="notes-input" placeholder="anotação..." rows="1"></textarea></td>
+        </tr>
+        <tr>
+          <td class="td-id">CT-23</td>
+          <td class="td-step">Sugerir local do encontro</td>
+          <td>Campo de local aceita texto ou integração com mapa</td>
+          <td class="td-result"><select class="status-select" onchange="recalc()"><option value="">–</option><option value="pass">✓ Passou</option><option value="fail">✗ Falhou</option><option value="skip">○ Pulado</option></select></td>
+          <td><textarea class="notes-input" placeholder="anotação..." rows="1"></textarea></td>
+        </tr>
+        <tr>
+          <td class="td-id">CT-24</td>
+          <td class="td-step">Outro usuário aceita o encontro</td>
+          <td>Encontro confirmado para os dois, notificação enviada</td>
+          <td class="td-result"><select class="status-select" onchange="recalc()"><option value="">–</option><option value="pass">✓ Passou</option><option value="fail">✗ Falhou</option><option value="skip">○ Pulado</option></select></td>
+          <td><textarea class="notes-input" placeholder="anotação..." rows="1"></textarea></td>
+        </tr>
+        <tr>
+          <td class="td-id">CT-25</td>
+          <td class="td-step">Outro usuário recusa ou propõe novo horário</td>
+          <td>Fluxo de renegociação funciona sem erros</td>
+          <td class="td-result"><select class="status-select" onchange="recalc()"><option value="">–</option><option value="pass">✓ Passou</option><option value="fail">✗ Falhou</option><option value="skip">○ Pulado</option></select></td>
+          <td><textarea class="notes-input" placeholder="anotação..." rows="1"></textarea></td>
+        </tr>
+        <tr>
+          <td class="td-id">CT-26</td>
+          <td class="td-step">Lembrete/notificação antes do encontro</td>
+          <td>Lembrete enviado no prazo configurado</td>
+          <td class="td-result"><select class="status-select" onchange="recalc()"><option value="">–</option><option value="pass">✓ Passou</option><option value="fail">✗ Falhou</option><option value="skip">○ Pulado</option></select></td>
+          <td><textarea class="notes-input" placeholder="anotação..." rows="1"></textarea></td>
+        </tr>
+        <tr>
+          <td class="td-id">CT-27</td>
+          <td class="td-step">Cancelar encontro já marcado</td>
+          <td>Encontro cancelado e o outro usuário é notificado</td>
+          <td class="td-result"><select class="status-select" onchange="recalc()"><option value="">–</option><option value="pass">✓ Passou</option><option value="fail">✗ Falhou</option><option value="skip">○ Pulado</option></select></td>
+          <td><textarea class="notes-input" placeholder="anotação..." rows="1"></textarea></td>
+        </tr>
+        <tr>
+          <td class="td-id">CT-28</td>
+          <td class="td-step">Avaliar o encontro depois que aconteceu</td>
+          <td>Tela de avaliação aparece e feedback é salvo</td>
+          <td class="td-result"><select class="status-select" onchange="recalc()"><option value="">–</option><option value="pass">✓ Passou</option><option value="fail">✗ Falhou</option><option value="skip">○ Pulado</option></select></td>
+          <td><textarea class="notes-input" placeholder="anotação..." rows="1"></textarea></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- OBSERVAÇÕES GERAIS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number" style="background: #888780;">i</div>
+      <span class="section-title">Observações gerais do testador(a)</span>
+    </div>
+    <div class="obs-box">
+      <textarea placeholder="Descreva bugs críticos, comportamentos inesperados, sugestões de melhoria ou qualquer comentário sobre a experiência geral do app..." rows="5"></textarea>
+    </div>
+  </div>
+
+  <div class="assinatura">
+    <div class="ass-field"><span>Assinatura do testador(a)</span></div>
+    <div class="ass-field"><span>Data de entrega</span></div>
+  </div>
+</div>
+
+<script>
+function recalc() {
+  const selects = document.querySelectorAll('.status-select');
+  let pass = 0, fail = 0, skip = 0, pend = 0;
+  selects.forEach(s => {
+    if (s.value === 'pass') pass++;
+    else if (s.value === 'fail') fail++;
+    else if (s.value === 'skip') skip++;
+    else pend++;
+  });
+  const total = selects.length;
+  const answered = pass + fail + skip;
+  const pct = answered > 0 ? Math.round((pass / (pass + fail)) * 100) : '–';
+  document.getElementById('total').textContent = total;
+  document.getElementById('cnt-pass').textContent = pass;
+  document.getElementById('cnt-fail').textContent = fail;
+  document.getElementById('cnt-pend').textContent = pend;
+  document.getElementById('pct').textContent = typeof pct === 'number' ? pct + '%' : pct;
+}
+recalc();
+</script>
