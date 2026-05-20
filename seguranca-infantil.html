@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Padrões de Segurança Infantil — Juntoo</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background-color: #0e0e0e;
+      color: #d4d4d4;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    header {
+      background-color: #121212;
+      border-bottom: 1px solid #1e1e1e;
+      padding: 28px 24px;
+      text-align: center;
+    }
+
+    .logo {
+      font-size: 32px;
+      font-weight: 900;
+      color: #00E676;
+      letter-spacing: -1px;
+      margin-bottom: 4px;
+    }
+
+    .tagline {
+      font-size: 14px;
+      color: #555;
+    }
+
+    main {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    h1 {
+      font-size: 26px;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+
+    .updated {
+      font-size: 13px;
+      color: #555;
+      margin-bottom: 32px;
+      display: block;
+    }
+
+    .intro {
+      background: #1a1a1a;
+      border-left: 3px solid #E53935;
+      border-radius: 0 12px 12px 0;
+      padding: 18px 20px;
+      margin-bottom: 40px;
+      color: #aaa;
+      font-size: 15px;
+    }
+
+    .intro strong { color: #fff; }
+
+    .age-badge {
+      display: inline-block;
+      background: #E53935;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 13px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-top: 10px;
+    }
+
+    h2 {
+      font-size: 19px;
+      font-weight: 700;
+      color: #00E676;
+      margin: 48px 0 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #1e1e1e;
+    }
+
+    h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #ffffff;
+      margin: 24px 0 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    p { margin-bottom: 14px; color: #aaa; }
+
+    ul {
+      list-style: none;
+      margin: 0 0 16px;
+      padding: 0;
+    }
+
+    ul li {
+      padding: 8px 0 8px 20px;
+      border-bottom: 1px solid #1a1a1a;
+      color: #aaa;
+      position: relative;
+    }
+
+    ul li::before {
+      content: '▸';
+      color: #00E676;
+      position: absolute;
+      left: 0;
+      font-size: 12px;
+      top: 10px;
+    }
+
+    ul li:last-child { border-bottom: none; }
+
+    strong { color: #e0e0e0; }
+
+    .contact-box {
+      background: #161616;
+      border: 1px solid #00E676;
+      border-radius: 14px;
+      padding: 22px 24px;
+      margin-top: 16px;
+    }
+
+    .contact-box a {
+      color: #00E676;
+      text-decoration: none;
+    }
+
+    .contact-box a:hover { text-decoration: underline; }
+
+    .contact-line {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      font-size: 15px;
+      color: #bbb;
+    }
+
+    .contact-line:last-child { margin-bottom: 0; }
+
+    .contact-icon {
+      width: 32px;
+      height: 32px;
+      background: #1e1e1e;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #1e1e1e;
+      margin: 40px 0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 32px 24px;
+      border-top: 1px solid #1e1e1e;
+      font-size: 13px;
+      color: #444;
+    }
+
+    footer a { color: #00E676; text-decoration: none; }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 22px; }
+      h2 { font-size: 17px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">Juntoo</div>
+    <div class="tagline">Conexões reais, sem enrolação 🇧🇷</div>
+  </header>
+
+  <main>
+
+    <h1>Padrões de Segurança Infantil</h1>
+    <span class="updated">Última atualização: 20 de maio de 2026</span>
+
+    <div class="intro">
+      O <strong>Juntoo</strong> tem <strong>tolerância zero</strong> com o abuso e a exploração sexual infantil (CSAE). Nosso aplicativo é estritamente projetado para adultos, e tomamos medidas rigorosas para manter nossa comunidade segura e em conformidade com as políticas do <strong>Google Play</strong> e leis internacionais.
+      <br/><br/>
+      Qualquer material ou comportamento que envolva abuso ou exploração infantil resultará no banimento permanente da conta e no reporte imediato às autoridades competentes.
+      <br/>
+      <span class="age-badge">🔞 Aplicativo exclusivo para maiores de 18 anos</span>
+    </div>
+
+    <!-- 1 -->
+    <h2>1. Tolerância Zero para CSAE</h2>
+    <p>O Juntoo proíbe estritamente qualquer forma de Abuso e Exploração Sexual Infantil (CSAE), o que inclui, mas não se limita a:</p>
+    <ul>
+      <li>Compartilhamento, criação ou promoção de Material de Abuso Sexual Infantil (CSAM).</li>
+      <li>Aliciamento (grooming), extorsão sexual ou contato inapropriado com menores.</li>
+      <li>Qualquer conteúdo que sexualize menores, mesmo que em formato de desenho, animação ou texto.</li>
+    </ul>
+
+    <!-- 2 -->
+    <h2>2. App restrito a maiores de 18 anos</h2>
+    <p>O Juntoo é uma plataforma exclusivamente para adultos. Proibimos estritamente a criação de contas por pessoas menores de 18 anos. Caso identifiquemos que uma conta pertence a um menor, ela será suspensa e excluída imediatamente.</p>
+
+    <!-- 3 -->
+    <h2>3. Como denunciar</h2>
+    <p>Todos os usuários podem e devem denunciar imediatamente qualquer suspeita de CSAE, grooming ou presença de menores no aplicativo. Oferecemos ferramentas internas para isso:</p>
+    <ul>
+      <li><strong>Denúncia no app:</strong> Você pode denunciar qualquer usuário diretamente pelo perfil ou pelo chat, selecionando o botão de "Denunciar". A denúncia é enviada imediatamente para nossa equipe de moderação.</li>
+      <li><strong>Denúncia por e-mail:</strong> Qualquer pessoa, seja usuário ou não, pode reportar suspeitas diretamente para nossa equipe de segurança através do e-mail <strong>seguranca@juntoo.app</strong> ou <strong>alexsandro.migotti@outlook.com</strong>.</li>
+    </ul>
+
+    <!-- 4 -->
+    <h2>4. Nossas ações contra infratores</h2>
+    <p>Ao receber uma denúncia de CSAE, o Juntoo toma as seguintes providências imediatas:</p>
+    <ul>
+      <li>A conta suspeita é bloqueada permanentemente.</li>
+      <li>Todo o conteúdo e os dados associados são preservados para investigação.</li>
+      <li>As informações do infrator são encaminhadas às autoridades policiais e organizações de proteção à criança, como a NCMEC (National Center for Missing & Exploited Children), quando aplicável.</li>
+    </ul>
+
+    <!-- 5 -->
+    <h2>5. Contato de Segurança</h2>
+    <div class="contact-box">
+      <div class="contact-line">
+        <div class="contact-icon">🛡️</div>
+        <span>Reportar Incidentes de Segurança Infantil: <br><strong><a href="mailto:alexsandro.migotti@outlook.com">alexsandro.migotti@outlook.com</a></strong></span>
+      </div>
+      <div class="contact-line">
+        <div class="contact-icon">✉️</div>
+        <span>E-mail alternativo: <a href="mailto:seguranca@juntoo.app">seguranca@juntoo.app</a></span>
+      </div>
+    </div>
+
+    <hr/>
+
+    <p style="font-size:13px; color:#444; text-align:center;">
+      Esta política foi elaborada para atender rigorosamente à Política de Padrões de Segurança Infantil do Google Play.
+    </p>
+
+  </main>
+
+  <footer>
+    <strong style="color:#00E676;">Juntoo</strong> &mdash; Conexões reais, sem enrolação 🇧🇷<br/>
+    <span>© 2026 Alexsandro Migotti. Todos os direitos reservados.</span>
+  </footer>
+
+</body>
+</html>
